@@ -32,19 +32,14 @@ FeaturesTrain <- read.table(file.path(Folder_path, "train", "X_train.txt"),heade
 Features<- rbind(FeaturesTrain, FeaturesTest)
 
 # Step 2 Extracts only the measurements on the mean and standard deviation for each measurement. 
-# 2.1 Set names to variables from V1, V2 .. to meaningful names
 names(Features)<- read.table(file.path(Folder_path, "features.txt"),head=FALSE)$V2
-names(Subject)<-c("Subject")
-names(Activity)<- c("Activity")
-
-# Step 2 Extracts only the measurements on the mean and standard deviation for each measurement. 
-# Extract the name that contains Mean and Sd
 interestName <- names(Features)[grep("mean\\(\\)|std\\(\\)", names(Features))]
 Features <- Features[interestName]
-# Merge the various datasets
+
+# Merge the various datasets adding meaningful names
 names(Subject)<-c("Subject")
 names(Activity)<- c("Activity")
-Data <- cbind(Features, Subject, Activity)
+Data <- cbind(Features, Subject=Subject, Activity= Activity)
 
 # Step 3 Uses descriptive activity names to name the activities in the data set
 names(Data)<-gsub("^t", "Time", names(Data))
@@ -54,7 +49,7 @@ names(Data)<-gsub("Gyro", "Gyroscope", names(Data))
 names(Data)<-gsub("Mag", "Magnitude", names(Data))
 names(Data)<-gsub("BodyBody", "Body", names(Data))
 
-# Step 4 Appropriately labels the data set with descriptive variable names. 
+        # Step 4 Appropriately labels the data set with descriptive variable names. 
 activityLabels <- read.table(file.path(Folder_path, "activity_labels.txt"),header = FALSE)
 Data$Activity <- activityLabels[Data$Activity,2]
 
