@@ -1,5 +1,8 @@
+## This is how the script produces the tidy dataset required.
+
 ## Preparation
 In line 1 to 15 the script prepares the file name and path for dowloading the dataset and unzip it in local folder
+
 ## Step 1: Merges the training and the test sets to create one data set.
 From line 17 to 33 the files for the Train and Test set for Subject, Activities and features are loaded and stored in dataframes
 ## Step 2 Extracts only the measurements on the mean and standard deviation for each measurement.
